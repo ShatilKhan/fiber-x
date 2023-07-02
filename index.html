@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FiberX</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 20px;
+        }
+    
+        h1 {
+          margin-bottom: 20px;
+        }
+    
+        .shoe-info {
+          display: grid;
+          grid-template-columns: 150px 200px;
+          gap: 10px;
+        }
+    
+        .shoe-info .label {
+          font-weight: bold;
+        }
+      </style>
+</head>
+<body>
+
+    <h1>Shoe Information</h1>
+    <div class="shoe-info">
+      <div class="label">Size:</div>
+      <div id="shoe-size"></div>
+      
+      <div class="label">Name:</div>
+      <div id="shoe-name"></div>
+      
+      <div class="label">Material:</div>
+      <div id="shoe-material"></div>
+      
+      <div class="label">Resell Count:</div>
+      <div id="shoe-resell-count"></div>
+    </div>
+    <script src="index.js"></script>
+    <script>
+      // Fetch the shoe data from the backend
+      fetch('/shoeData')
+        .then(response => response.json())
+        .then(shoeData => {
+          // Update the HTML elements with the shoe information
+          document.getElementById('shoe-size').textContent = shoeData.size;
+          document.getElementById('shoe-name').textContent = shoeData.name;
+          document.getElementById('shoe-material').textContent = shoeData.material;
+          document.getElementById('shoe-resell-count').textContent = shoeData.resellCount.toString();
+        })
+        .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
